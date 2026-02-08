@@ -1,0 +1,41 @@
+---
+interface Props {
+    href?: string;
+    variant?: "primary" | "outline" | "ghost";
+    class?: string;
+    [x: string]: any;
+}
+
+const { href, variant = "primary", class: className, ...rest } = Astro.props;
+
+const baseStyles =
+    "inline-block px-8 py-4 text-sm font-medium tracking-wide rounded-nordic transition-all duration-300 text-center";
+
+const variants = {
+    primary: "bg-ink text-canvas hover:opacity-90",
+    outline: "border border-ink/10 text-ink hover:bg-ink/5",
+    ghost: "text-ink/60 hover:text-ink hover:bg-ink/5 px-0",
+};
+
+const Element = href ? "a" : "button";
+---
+
+<Element
+    href={href}
+    class:list={[
+        "group relative overflow-hidden",
+        baseStyles,
+        variants[variant],
+        className,
+    ]}
+    {...rest}
+>
+    <span class="relative z-10"><slot /></span>
+
+    <!-- Premium Geometric Reveal -->
+    {
+        variant !== "ghost" && (
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+        )
+    }
+</Element>

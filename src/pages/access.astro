@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Access | Nordic Coffee">
+    <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <header class="mb-24">
+            <h1 class="text-display font-medium text-ink mb-6">Access</h1>
+            <p class="text-lg text-ink-muted">
+                静かな通りの角でお待ちしております。
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <!-- Info Column -->
+            <div class="lg:col-span-4 space-y-16">
+                <div class="space-y-4">
+                    <h2
+                        class="text-xs font-bold uppercase tracking-widest text-accent"
+                    >
+                        Address
+                    </h2>
+                    <p class="text-ink leading-relaxed">
+                        〒150-0001<br />
+                        東京都渋谷区静寂町 1-2-3<br />
+                        Nordic Building 1F
+                    </p>
+                    <a
+                        href="https://maps.google.com"
+                        target="_blank"
+                        class="inline-block text-sm text-ink-muted hover:text-accent underline decoration-1 underline-offset-4 transition-colors"
+                    >
+                        Google Mapsで見る
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    <h2
+                        class="text-xs font-bold uppercase tracking-widest text-accent"
+                    >
+                        Opening Hours
+                    </h2>
+                    <dl class="text-ink text-sm divide-y divide-ink/5">
+                        <div class="flex justify-between py-3">
+                            <dt>Weekday</dt>
+                            <dd>08:00 — 19:00</dd>
+                        </div>
+                        <div class="flex justify-between py-3">
+                            <dt>Weekend</dt>
+                            <dd>09:00 — 18:00</dd>
+                        </div>
+                        <div class="flex justify-between py-3 font-medium">
+                            <dt>Holiday</dt>
+                            <dd>Closed</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="space-y-4">
+                    <h2
+                        class="text-xs font-bold uppercase tracking-widest text-accent"
+                    >
+                        Contact
+                    </h2>
+                    <p class="text-ink">03-0000-0000</p>
+                    <p class="text-ink">hello@nordiccoffee.jp</p>
+                </div>
+            </div>
+
+            <!-- Map Column -->
+            <div class="lg:col-span-8">
+                <div
+                    class="aspect-video w-full bg-canvas rounded-nordic overflow-hidden relative border border-ink/5"
+                >
+                    <!-- Fake Map Placeholder -->
+                    <div
+                        class="absolute inset-0 flex items-center justify-center"
+                    >
+                        <div
+                            class="w-8 h-8 rounded-full bg-accent animate-pulse relative"
+                        >
+                            <div
+                                class="absolute inset-0 rounded-full bg-accent opacity-20 animate-ping"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-6 right-6 bg-white/80 backdrop-blur p-4 rounded-sm border border-ink/5 text-[10px] uppercase tracking-widest"
+                    >
+                        Map Preview
+                    </div>
+                </div>
+
+                <div class="mt-8 p-12 bg-accent/5 rounded-nordic">
+                    <h3 class="text-sm font-medium text-ink mb-4">By Train</h3>
+                    <p class="text-sm text-ink-muted leading-relaxed">
+                        JR山手線「渋谷駅」西口より徒歩10分。静かな通りを抜けた突き当たりにございます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

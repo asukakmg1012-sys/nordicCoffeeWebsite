@@ -1,0 +1,175 @@
+---
+import Header from "../components/core/Header.astro";
+import Footer from "../components/core/Footer.astro";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const {
+    title = "Nordic Coffee Shop",
+    description = "Quiet, bright minimalism in every cup.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <ClientRouter />
+
+        <!-- SEO -->
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={Astro.url.href} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url.href} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL("/ogp.jpg", Astro.url)} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url.href} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta
+            property="twitter:image"
+            content={new URL("/ogp.jpg", Astro.url)}
+        />
+
+        <!-- Google Fonts: Inter & Noto Sans JP -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <script type="application/ld+json" is:inline>
+            {
+                "@context": "https://schema.org",
+                "@type": "CoffeeShop",
+                "name": "Nordic Coffee",
+                "image": "https://nordic-coffee.example.com/ogp.jpg",
+                "@id": "https://nordic-coffee.example.com",
+                "url": "https://nordic-coffee.example.com",
+                "telephone": "+81-00-0000-0000",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "123 Nordic Street",
+                    "addressLocality": "Quiet City",
+                    "postalCode": "150-0001",
+                    "addressCountry": "JP"
+                },
+                "openingHoursSpecification": [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday"
+                        ],
+                        "opens": "08:00",
+                        "closes": "19:00"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": ["Saturday", "Sunday"],
+                        "opens": "09:00",
+                        "closes": "18:00"
+                    }
+                ]
+            }
+        </script>
+
+        <style is:global>
+            /* Subtle fade-in for page load */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .page-enter {
+                animation: fadeIn 0.6s ease-out forwards;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .page-enter {
+                    animation: none;
+                }
+            }
+
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition:
+                    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .reveal.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
+        <style is:global>
+            @import "../styles/global.css";
+        </style>
+    </head>
+    <body class="selection:bg-accent/20 min-h-screen flex flex-col relative">
+        <!-- Global Artisan Grain Overlay -->
+        <div
+            class="fixed inset-0 pointer-events-none z-9999 opacity-[0.035] artisan-grain"
+        >
+        </div>
+
+        <Header />
+        <main class="page-enter grow">
+            <slot />
+        </main>
+        <Footer />
+
+        <script is:inline>
+            function initScrollReveal() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px",
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("active");
+                        }
+                    });
+                }, observerOptions);
+
+                document
+                    .querySelectorAll(".reveal")
+                    .forEach((el) => observer.observe(el));
+            }
+
+            // Run on initial load
+            initScrollReveal();
+
+            // Re-run after View Transitions navigation
+            document.addEventListener("astro:after-swap", initScrollReveal);
+        </script>
+    </body>
+</html>

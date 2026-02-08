@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About | Nordic Coffee">
+    <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start"
+        >
+            <!-- Visual Column -->
+            <div class="lg:col-span-5 space-y-12">
+                <div
+                    class="aspect-4/5 bg-canvas overflow-hidden rounded-nordic relative"
+                >
+                    <div
+                        class="absolute inset-0 flex items-center justify-center text-ink/10 text-xs tracking-[0.5em] uppercase vertical-text"
+                    >
+                        The Atmosphere
+                    </div>
+                    <!-- Image placeholder -->
+                </div>
+                <div
+                    class="aspect-video bg-canvas overflow-hidden rounded-nordic flex items-center justify-center text-ink/10 text-xs tracking-[0.3em] uppercase"
+                >
+                    Craftsmanship
+                </div>
+            </div>
+
+            <!-- Content Column -->
+            <div class="lg:col-span-7 space-y-24">
+                <header>
+                    <span
+                        class="text-accent text-sm font-bold uppercase tracking-[0.3em] mb-6 block"
+                        >Our philosophy</span
+                    >
+                    <h1
+                        class="text-h1 font-medium text-ink leading-[1.15] text-balance"
+                    >
+                        一杯のコーヒーを通して、<br />
+                        日常に「間」をデザインする。
+                    </h1>
+                </header>
+
+                <div class="prose prose-nordic">
+                    <p class="text-lg text-ink leading-relaxed mb-8">
+                        忙しない都市の喧騒から離れ、冷たく澄んだ冬の空気の中で、薪がパチパチとはぜる音を聞くような。私たちは、そんな「静寂と温もり」が共存する時間を大切にしています。
+                    </p>
+                    <p class="text-ink-muted leading-loose mb-12">
+                        北欧の暮らしには、自然と調和し、今この瞬間を愛でる知恵が詰まっています。私たちが選ぶ浅煎りのコーヒー豆は、その豆が育った土地の記憶を鮮やかに映し出します。果実のような輝き、花のような香り。それらを最大限に引き出すための、徹底的な温度管理と繊細な抽出。
+                    </p>
+
+                    <h2 class="text-xl font-medium text-ink mb-6">
+                        Minimalism is not emptiness.
+                    </h2>
+                    <p class="text-ink-muted leading-loose">
+                        私たちのデザインは、余白を大切にします。過度な装飾を削ぎ落とすことで、コーヒーの香りがより際立ち、大切な人との会話がより深まる。そのために選ばれた、手触りの良い木製のテーブル、目に優しいやわらかな照明、そして呼吸を整えるための十分な空間。
+                    </p>
+                </div>
+
+                <div
+                    class="grid grid-cols-2 gap-12 pt-12 border-t border-ink/5"
+                >
+                    <div>
+                        <h3
+                            class="text-xs font-bold uppercase tracking-widest text-accent mb-4"
+                        >
+                            Roast
+                        </h3>
+                        <p class="text-sm text-ink-muted">
+                            Light / Nordic-style
+                        </p>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-xs font-bold uppercase tracking-widest text-accent mb-4"
+                        >
+                            Space
+                        </h3>
+                        <p class="text-sm text-ink-muted">
+                            Quiet / Work-friendly
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .vertical-text {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+</style>

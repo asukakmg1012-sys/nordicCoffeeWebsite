@@ -1,0 +1,26 @@
+{
+  "name": "nordic-coffee-shop",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A premium, minimalist coffee shop landing page built with Astro and Tailwind CSS.",
+  "author": "Nordic Coffee Shop",
+  "license": "MIT",
+  "keywords": [
+    "astro",
+    "tailwind-css",
+    "coffee-shop",
+    "landing-page",
+    "minimalist"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.17.1",
+    "tailwindcss": "^4.1.18"
+  }
+}

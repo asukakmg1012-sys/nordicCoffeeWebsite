@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors - Artisan Minimalist (Nordic Coffee Shop) */
+  --color-canvas: #F8F7F2;
+  /* Linen/Paper */
+  --color-canvas-muted: #F0EEE6;
+  --color-ink: #1A1A1A;
+  /* Deep Charcoal */
+  --color-ink-muted: #666666;
+  --color-accent: #8B7E74;
+  /* Artisan Taupe */
+  --color-accent-hover: #7A6D63;
+  --color-wood: #C2B299;
+
+  /* Typography */
+  --font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif JP", serif;
+
+  /* Clamp-based scale */
+  --text-display: clamp(2.5rem, 10vw, 5rem);
+  --text-h1: clamp(1.75rem, 6vw, 3rem);
+  --text-h2: clamp(1.5rem, 4vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 3vw, 1.75rem);
+
+  /* Shadows - Minimal */
+  --shadow-nordic: 0 4px 20px rgba(0, 0, 0, 0.03);
+
+  /* Radii - Sharp */
+  --radius-nordic: 2px;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-medium tracking-tight;
+  }
+
+  /* Measure control for body text */
+  article,
+  .prose {
+    max-width: 65ch;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fade-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .artisan-grain {
+    background-image: url("https://www.transparenttextures.com/patterns/fine-grained.png");
+  }
+
+  .letter-spacing-wide {
+    letter-spacing: 0.1em;
+  }
+
+  .letter-spacing-widest {
+    letter-spacing: 0.2em;
+  }
+
+  .light-leak {
+    background: radial-gradient(circle at 50% 50%, rgba(139, 126, 116, 0.1) 0%, transparent 70%);
+    filter: blur(60px);
+    mix-blend-mode: soft-light;
+    animation: light-leak-drift 20s infinite alternate ease-in-out;
+  }
+
+  .shimmer-aurora {
+    background: linear-gradient(120deg,
+        transparent 30%,
+        rgba(139, 126, 116, 0.05) 50%,
+        transparent 70%);
+    background-size: 200% 100%;
+    animation: aurora-flow 8s infinite linear;
+  }
+}
+
+@keyframes light-leak-drift {
+  0% {
+    transform: translate(-10%, -10%) scale(1);
+  }
+
+  100% {
+    transform: translate(10%, 10%) scale(1.1);
+  }
+}
+
+@keyframes aurora-flow {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

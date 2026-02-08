@@ -1,0 +1,110 @@
+---
+import LiveStatus from "../sections/LiveStatus.astro";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-32 px-6 md:px-12 border-t border-ink/5 bg-canvas font-serif">
+    <div
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-12"
+    >
+        <!-- Brand & Bio -->
+        <div class="md:col-span-5 space-y-8">
+            <h2 class="text-3xl font-serif tracking-tight text-ink">
+                Emma Coffee<span class="text-accent ml-1">.</span>
+            </h2>
+            <p class="text-base text-ink-muted leading-relaxed max-w-sm italic">
+                Quiet, bright minimalism in every cup. A space designed to
+                bridge the gap between winter clarity and the warmth of wood.
+            </p>
+            <div class="flex gap-6">
+                <a
+                    href="#"
+                    class="text-accent hover:text-ink transition-colors"
+                    aria-label="Instagram"
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><rect x="2" y="2" width="20" height="20" rx="5" ry="5"
+                        ></rect><path
+                            d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                        ></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"
+                        ></line></svg
+                    >
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Info -->
+        <div class="md:col-span-3 space-y-8">
+            <h3
+                class="text-[10px] font-bold uppercase letter-spacing-widest text-accent font-sans"
+            >
+                Hours
+            </h3>
+            <div class="space-y-4">
+                <LiveStatus />
+                <ul class="text-sm text-ink space-y-3">
+                    <li class="flex justify-between">
+                        <span>Mon — Fri</span>
+                        <span class="text-ink/60">08:00 — 19:00</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span>Sat — Sun</span>
+                        <span class="text-ink/60">09:00 — 18:00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Location & Map -->
+        <div class="md:col-span-4 space-y-8">
+            <h3
+                class="text-[10px] font-bold uppercase letter-spacing-widest text-accent font-sans"
+            >
+                Location
+            </h3>
+            <div class="space-y-6">
+                <p class="text-sm text-ink leading-relaxed">
+                    123 Nordic Street, Quiet City<br />
+                    150-0001, Japan
+                </p>
+                <!-- Bespoke Stylized Map Placeholder -->
+                <div
+                    class="aspect-video bg-canvas-muted border border-ink/5 relative overflow-hidden group"
+                >
+                    <div
+                        class="absolute inset-0 bg-ink/5 shimmer-aurora opacity-20"
+                    >
+                    </div>
+                    <div
+                        class="absolute inset-0 flex items-center justify-center"
+                    >
+                        <span
+                            class="text-[9px] uppercase tracking-widest text-ink/20"
+                            >View on Map</span
+                        >
+                    </div>
+                    <!-- Custom dot for location -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-accent rounded-full animate-pulse"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="max-w-7xl mx-auto mt-32 pt-8 border-t border-ink/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] uppercase letter-spacing-widest text-ink/30 font-sans"
+    >
+        <p>© {currentYear} Emma Coffee. All rights reserved.</p>
+        <p>Artisan Minimalist Design</p>
+    </div>
+</footer>

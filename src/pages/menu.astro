@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MenuTable from "../components/ui/MenuTable.astro";
+
+const coffeeItems = [
+    {
+        name: "Filter Coffee",
+        description:
+            "Ethically sourced, lightly roasted beans. Rotating seasonal selection.",
+        price: "¥650",
+    },
+    {
+        name: "Hand Drip V60",
+        description:
+            "Precision brewing for maximum clarity and flavor definition.",
+        price: "¥750",
+    },
+    {
+        name: "Oat Milk Latte",
+        description:
+            "Smooth espresso paired with creamy, sustainable oat milk.",
+        price: "¥680",
+    },
+    {
+        name: "Espresso Tonic",
+        description:
+            "Double shot espresso, premium tonic, and a twist of seasonal citrus.",
+        price: "¥720",
+    },
+];
+
+const sweetsItems = [
+    {
+        name: "Cardamom Bun",
+        description:
+            "Traditional Swedish-style bun with fresh-ground cardamom and pearl sugar.",
+        price: "¥480",
+    },
+    {
+        name: "Cloudberry Tart",
+        description:
+            "Delicate tart shell with Nordic cloudberry jam and vanilla bean cream.",
+        price: "¥850",
+    },
+    {
+        name: "Rye Brownie",
+        description:
+            "Dense, dark chocolate brownie made with artisanal rye flour and sea salt.",
+        price: "¥550",
+    },
+];
+---
+
+<BaseLayout title="Menu | Nordic Coffee">
+    <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <header class="mb-24">
+            <h1 class="text-display font-medium text-ink mb-6">Menu</h1>
+            <p class="text-lg text-ink-muted max-w-xl text-balance">
+                素材の持つ個性を最大限に引き出すため、私たちは浅煎りの焙煎と丁寧な抽出を心がけています。
+            </p>
+        </header>
+
+        <div class="space-y-32">
+            <MenuTable category="Coffee" items={coffeeItems} />
+            <MenuTable category="Sweets" items={sweetsItems} />
+        </div>
+
+        <aside
+            class="mt-32 p-12 bg-white border border-ink/5 rounded-nordic text-center space-y-4"
+        >
+            <h3 class="text-sm font-bold uppercase tracking-widest text-ink">
+                Private Booking
+            </h3>
+            <p class="text-sm text-ink-muted">
+                We offer private events and coffee workshops. Please inquire for
+                details.
+            </p>
+            <a
+                href="/contact"
+                class="inline-block text-accent text-sm font-medium hover:underline decoration-1 underline-offset-4"
+                >Get in touch →</a
+            >
+        </aside>
+    </section>
+</BaseLayout>

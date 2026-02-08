@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/ui/Button.astro";
+
+export async function getStaticPaths() {
+    const beanEntries = await getCollection("beans");
+    return beanEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const {
+    title,
+    origin,
+    roastLevel,
+    process,
+    variety,
+    altitude,
+    notes,
+    description,
+    price,
+    weight,
+    featuredImage,
+} = entry.data;
+---
+
+<BaseLayout title={`${title} | Emma Coffee`} description={description}>
+    <article class="pt-32 pb-40 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
+            <!-- Image Section -->
+            <div class="reveal">
+                <div
+                    class="aspect-4/5 overflow-hidden bg-canvas-muted border border-ink/5 relative group"
+                >
+                    <Image
+                        src={featuredImage}
+                        alt={title}
+                        width={1200}
+                        height={1500}
+                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                    <div class="absolute top-6 left-6">
+                        <span
+                            class="px-4 py-2 bg-canvas/90 backdrop-blur-md text-[10px] uppercase tracking-widest font-sans font-bold border border-ink/5"
+                        >
+                            {roastLevel} Roast
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="space-y-12 reveal" style="transition-delay: 0.2s;">
+                <header class="space-y-4">
+                    <div
+                        class="flex items-center gap-4 text-accent text-xs uppercase tracking-widest font-sans font-bold"
+                    >
+                        <span>{origin}</span>
+                        <span class="w-8 h-px bg-accent/30"></span>
+                        <span>{process}</span>
+                    </div>
+                    <h1
+                        class="text-5xl md:text-7xl font-serif text-ink leading-tight"
+                    >
+                        {title}
+                    </h1>
+                </header>
+
+                <div class="grid grid-cols-2 gap-8 border-y border-ink/5 py-8">
+                    <div class="space-y-1">
+                        <span
+                            class="text-[10px] uppercase tracking-widest text-ink/40 font-sans font-bold"
+                            >Price</span
+                        >
+                        <p class="text-xl font-serif">{price}</p>
+                    </div>
+                    <div class="space-y-1">
+                        <span
+                            class="text-[10px] uppercase tracking-widest text-ink/40 font-sans font-bold"
+                            >Weight</span
+                        >
+                        <p class="text-xl font-serif">{weight}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="space-y-3">
+                        <span
+                            class="text-[10px] uppercase tracking-widest text-accent font-sans font-bold"
+                            >Tasting Notes</span
+                        >
+                        <div class="flex flex-wrap gap-3">
+                            {
+                                notes.map((note) => (
+                                    <span class="px-3 py-1 bg-ink/5 text-ink text-xs italic font-serif">
+                                        {note}
+                                    </span>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <span
+                            class="text-[10px] uppercase tracking-widest text-ink/40 font-sans font-bold"
+                            >Coffee Profile</span
+                        >
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm"
+                        >
+                            {
+                                variety && (
+                                    <div class="flex justify-between border-b border-ink/5 pb-2">
+                                        <span class="text-ink/60 italic">
+                                            Variety
+                                        </span>
+                                        <span class="font-medium">
+                                            {variety}
+                                        </span>
+                                    </div>
+                                )
+                            }
+                            {
+                                altitude && (
+                                    <div class="flex justify-between border-b border-ink/5 pb-2">
+                                        <span class="text-ink/60 italic">
+                                            Altitude
+                                        </span>
+                                        <span class="font-medium">
+                                            {altitude}
+                                        </span>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="prose prose-nordic max-w-none text-ink/80 leading-relaxed font-serif italic text-lg"
+                >
+                    <Content />
+                </div>
+
+                <div class="pt-8">
+                    <Button href="/menu" variant="outline" class="px-10! py-4!">
+                        Back to Collection
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </article>
+</BaseLayout>

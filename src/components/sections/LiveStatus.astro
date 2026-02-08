@@ -1,0 +1,76 @@
+---
+interface Props {
+    class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Shop Hours Logic (Artisan Minimalist)
+// Mon-Fri: 08:00 - 19:00
+// Sat-Sun: 09:00 - 18:00
+---
+
+<div class:list={["flex items-center gap-3", className]} id="live-status">
+    <div class="relative w-2 h-2">
+        <div
+            class="absolute inset-0 rounded-full bg-accent animate-ping opacity-20"
+            id="status-ping"
+        >
+        </div>
+        <div class="relative w-2 h-2 rounded-full bg-accent" id="status-dot">
+        </div>
+    </div>
+    <span
+        class="text-[10px] uppercase tracking-widest font-sans font-bold text-ink/60"
+        id="status-text"
+    >
+        Checking Status...
+    </span>
+</div>
+
+<script is:inline>
+    function updateLiveStatus() {
+        const now = new Date();
+        const day = now.getDay(); // 0: Sun, 1: Mon, ..., 6: Sat
+        const hour = now.getHours();
+        const minutes = now.getMinutes();
+        const time = hour + minutes / 60;
+
+        const statusText = document.getElementById("status-text");
+        const statusDot = document.getElementById("status-dot");
+        const statusPing = document.getElementById("status-ping");
+
+        if (!statusText || !statusDot || !statusPing) return;
+
+        let isOpen = false;
+        let nextEvent = "";
+
+        if (day >= 1 && day <= 5) {
+            // Mon-Fri
+            if (time >= 8 && time < 19) isOpen = true;
+            nextEvent = isOpen ? "Until 19:00" : "Opens at 08:00";
+        } else {
+            // Sat-Sun
+            if (time >= 9 && time < 18) isOpen = true;
+            nextEvent = isOpen ? "Until 18:00" : "Opens at 09:00";
+        }
+
+        if (isOpen) {
+            statusText.textContent = `Open Now • ${nextEvent}`;
+            statusDot.className = "relative w-2 h-2 rounded-full bg-accent";
+            statusPing.className =
+                "absolute inset-0 rounded-full bg-accent animate-ping opacity-20";
+        } else {
+            statusText.textContent = `Closed • ${nextEvent}`;
+            statusDot.className = "relative w-2 h-2 rounded-full bg-ink/20";
+            statusPing.className = "hidden";
+        }
+    }
+
+    // Update immediately and then every minute
+    updateLiveStatus();
+    setInterval(updateLiveStatus, 60000);
+
+    // Re-run for View Transitions
+    document.addEventListener("astro:after-swap", updateLiveStatus);
+</script>
